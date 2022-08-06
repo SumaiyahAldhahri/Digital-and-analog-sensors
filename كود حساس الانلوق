@@ -1,0 +1,39 @@
+#include <LiquidCrystal.h>
+
+int lcdRSPin = 12;
+int lcdEPin = 11;
+int lcdD4Pin = 5;
+int lcdD5Pin = 4;
+int lcdD6Pin = 3;
+int lcdD7Pin = 2;
+
+LiquidCrystal lcd(lcdRSPin, lcdEPin,
+                  lcdD4Pin, lcdD5Pin, lcdD6Pin, lcdD7Pin);
+
+
+
+
+void loop()
+{
+	int TMP36 = A0;
+  	int analogValue;
+  	float temperature;
+  
+  	analogValue = analogRead(TMP36);
+  	temperature = float(analogValue);
+  	temperature = temperature / 1023;
+  	temperature = temperature * 500;  	
+  
+  	lcd.begin(16, 2);
+  	
+  	lcd.print(temperature);
+
+	delay(5000);
+}
+
+void setup()
+{
+  	lcd.setCursor(0, 1);
+  
+  	lcd.print(millis() / 1000);
+}
